@@ -51,9 +51,9 @@ combine = args.combine
 
 def getprefixes(ASN, transit):
 
-    ip = "***IP of router"
-    username = 'someuser with at least RO privs'
-    path2keyfile = 'somekeyfile'
+    ip = "128.164.255.178"
+    username = 'netconf'
+    path2keyfile = '/home/agallo/.ssh/netconf'
 
     dev = Device(ip, user=username, ssh_private_key_file=path2keyfile)
     dev.open()
@@ -102,7 +102,6 @@ def sanitycheck(ASN):
         ASNnotes = "not a 32 bit integer"
         ASNtype = "not valid"
         return ASNtype, ASNnotes, ASNvalid
-        
 
     if ASN >= 65536:
         ASNtype = "Four byte ASN"
