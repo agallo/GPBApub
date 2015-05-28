@@ -74,11 +74,12 @@ def getprefixes(ASN, transit, router, auser, keyfile):
         devcommand += 2
         print "keyfile is not provided and devommand is: " + str(devcommand)
 
-
     if devcommand == 0:
         dev = Device(router)
     elif devcommand == 1:
         dev = Device(router, user=username)
+    elif devcommand == 2:
+        dev = Device(router, ssh_private_key_file=path2keyfile)
     else:
         dev = Device(router, user=username, ssh_private_key_file=path2keyfile)
 
