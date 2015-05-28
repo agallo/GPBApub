@@ -62,14 +62,25 @@ combine = args.combine
 
 def getprefixes(ASN, transit, router, auser, keyfile):
 
+    devcommand = 0
+
     if auser is not None:
         username = auser
+        devcommand += 1
 
     if keyfile is not None:
         path2keyfile = keyfile
+        devcommand += 2
 
-    dev = Device(router, user=username, ssh_private_key_file=path2keyfile)
+    if devcommand == 0:
+        dev = Device(router)
+    elif devcommand == 1:
+        dev = Device(router, user=username)
+    else:
+        dev = Device(router, user=username, ssh_private_key_file=path2keyfile)
+
     dev.open()
+
     if transit:
         ASNprefixes = dev.rpc.get_route_information(aspath_regex=".* " + str(ASN) + " .*")
     else:
