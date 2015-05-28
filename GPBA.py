@@ -17,9 +17,9 @@ import time
 # setup some command line arguments
 
 parser = ArgumentParser(description="Script to pull prefixes advertised by (or through)"
-                                    "A given ASN")
+                                    " given ASN")
 
-parser.add_argument('ASN', metavar='2byte/4byte ASN', type=int)
+parser.add_argument('ASN', metavar='ASN', type=int)
 
 parser.add_argument('router', metavar='target router')
 
