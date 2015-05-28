@@ -67,10 +67,13 @@ def getprefixes(ASN, transit, router, auser, keyfile):
     if auser is not None:
         username = auser
         devcommand += 1
+        print "username is not provided and devommand is: " + str(devcommand)
 
     if keyfile is not None:
         path2keyfile = keyfile
         devcommand += 2
+        print "keyfile is not provided and devommand is: " + str(devcommand)
+
 
     if devcommand == 0:
         dev = Device(router)
