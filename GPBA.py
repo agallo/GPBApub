@@ -229,7 +229,6 @@ def main():
         print "Number of /24 equivalents: " + str(v4twentyfours)
         print "Number of v6 prefixes: " + str(len(v6prefixes))
         print "Number of v6 end host subnets (/64s): " + str(summerizev6(v6prefixes))
-    print "v4prefixes is of type " + v4prefixes
     createfiles(ASN, v4prefixes, v6prefixes, combine)
 
 
