@@ -39,6 +39,10 @@ optional arguments:
                         than current shell user
 ````
 
+Known issues:
+Empty files will be created if no prefixes are returned from the router.
+(easy fix is to delete the emply file after creation, proper fix is to suppress creation in the first place) 
+
 A note on authentication:
 The default behavior (with no -u or -k) assumes the username and private key of the shell user running the script.
 The assumption is that this user has at least read-only privileges to the specified router.
