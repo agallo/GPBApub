@@ -4,7 +4,6 @@ __author__ = 'agallo'
 
 
 # script to get all the prefixes for a given ASN
-# TODO: more flexible authentication options (username/password via command line)
 # TODO: supress file create if there are no records
 
 
