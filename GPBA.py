@@ -21,6 +21,8 @@ parser = ArgumentParser(description="Script to pull prefixes advertised by (or t
 
 parser.add_argument('ASN', metavar='2byte/4byte ASN', type=int)
 
+parser.add_argument('router', metavar='target router')
+
 parser.add_argument('-a', '--addr_family', type=int,
                     choices=[4, 6], dest='af',
                     help="Address family. -a 4 force v4 only, -a 6 force v6 only. (Default is both")
@@ -43,19 +45,19 @@ parser.add_argument('-t', '--include-transit', dest='transit',action='store_true
 args = parser.parse_args()
 
 ASN = args.ASN
+router = args.router
 lookup = args.l
 af = args.af
 summarize = args.summarize
 transit = args.transit
 combine = args.combine
 
-def getprefixes(ASN, transit):
+def getprefixes(ASN, transit, router):
 
-    ip = "128.164.255.178"
     username = 'netconf'
     path2keyfile = '/home/agallo/.ssh/netconf'
 
-    dev = Device(ip, user=username, ssh_private_key_file=path2keyfile)
+    dev = Device(router, user=username, ssh_private_key_file=path2keyfile)
     dev.open()
     if transit:
         ASNprefixes = dev.rpc.get_route_information(aspath_regex=".* " + str(ASN) + " .*")
@@ -207,7 +209,7 @@ def main():
     if lookup:
         print str(ASN) + " is an " + Anotes + " " + Atype
         print  getASname(ASN)
-    ASNprefixes = getprefixes(ASN, transit)
+    ASNprefixes = getprefixes(ASN, transit, router)
     v4prefixes, v6prefixes = processprefixes(ASNprefixes)
     v4hosts, v4twentyfours= summarizev4(v4prefixes)
     if summarize:
