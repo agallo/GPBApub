@@ -10,7 +10,8 @@ Requirements:
  
 
  ````
-usage: GPBA.py [-h] [-a {4,6}] [-c] [-l] [-s] [-t] ASN target_router
+usage: GPBA.py [-h] [-a {4,6}] [-c] [-l] [-s] [-t] [-u USER] [-k KEY]
+               ASN target_router
 
 Script to pull prefixes advertised by (or through) a given ASN
 
@@ -29,14 +30,20 @@ optional arguments:
                         lookup)
   -s, --summarize       Provide a summary of hosts & /24 (v4) /64 (v4)
                         represented by prefixes (Default is not to summarize)
-  -t, --include-transit
-                        Include transit routes in query. Changes regex from
+  -t, --transit         Include transit routes in query. Changes regex from
                         ".* ASN" to ".* ASN .*" (Default is do not include
                         transit
+  -u USER, --user USER  username for router authentication (specify if
+                        different than current shell user)
+  -k KEY, --key KEY     full path to ssh private key (specify if different
+                        than current shell user
 ````
 
+A note on authentication:
+The default behavior (with no -u or -k) assumes the username and private key of the shell user running the script.
+The assumption is that this user has at least read-only privileges to the specified router.
+You can specify a different user and key file.  The script doesn't require these flags be passed together, but that 
+is generally how they would be used.
 
-
-Currently, IP of the target router and authentication data are hardcoded; future release will allow passing that 
-information via command arguments.
+Currently, password authentication isn't supported, though it wouldn't be hard to add.
 

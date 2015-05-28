@@ -37,14 +37,14 @@ parser.add_argument('-s', '--summarize', dest='summarize', action='store_true',
                     help="Provide a summary of hosts & /24 (v4) /64 (v4) represented by prefixes"
                          " (Default is not to summarize)")
 
-parser.add_argument('-t', '--include-transit', dest='transit',action='store_true',
+parser.add_argument('-t', '--transit', dest='transit',action='store_true',
                     help='Include transit routes in query.  Changes regex from ".* ASN" to ".* ASN .*"'
                          ' (Default is do not include transit')
 
-parser.add_argument('-u', '--user', dest='user',type=str,
+parser.add_argument('-u', '--user', dest='user', type=str,
                     help='username for router authentication (specify if different than current shell user)')
 
-parser.add_argument('-k', '--key', dest='key',type=str,
+parser.add_argument('-k', '--key', dest='key', type=str,
                     help='full path to ssh private key (specify if different than current shell user')
 
 
@@ -67,12 +67,10 @@ def getprefixes(ASN, transit, router, auser, keyfile):
     if auser is not None:
         username = auser
         devcommand += 1
-        print "username is not provided and devommand is: " + str(devcommand)
 
     if keyfile is not None:
         path2keyfile = keyfile
         devcommand += 2
-        print "keyfile is not provided and devommand is: " + str(devcommand)
 
     if devcommand == 0:
         dev = Device(router)
