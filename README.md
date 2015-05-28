@@ -8,7 +8,8 @@ Requirements:
  - [Juniper PyEZ](https://techwiki.juniper.net/Automation_Scripting/010_Getting_Started_and_Reference/Junos_PyEZ/Installation)
  - [pythonwhois](http://cryto.net/pythonwhois/index.html)
  
- 
+
+ ````
 usage: GPBA.py [-h] [-a {4,6}] [-c] [-l] [-s] [-t] ASN target_router
 
 Script to pull prefixes advertised by (or through) a given ASN
@@ -32,7 +33,7 @@ optional arguments:
                         Include transit routes in query. Changes regex from
                         ".* ASN" to ".* ASN .*" (Default is do not include
                         transit
-
+````
 
 
 
