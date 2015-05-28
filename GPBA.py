@@ -41,20 +41,32 @@ parser.add_argument('-t', '--include-transit', dest='transit',action='store_true
                     help='Include transit routes in query.  Changes regex from ".* ASN" to ".* ASN .*"'
                          ' (Default is do not include transit')
 
+parser.add_argument('-u', '--user', dest='user',type=str,
+                    help='username for router authentication (specify if different than current shell user)')
+
+parser.add_argument('-k', '--key', dest='key',type=str,
+                    help='full path to ssh private key (specify if different than current shell user')
+
+
 args = parser.parse_args()
 
 ASN = args.ASN
 router = args.router
+auser = args.user
+keyfile = args.key
 lookup = args.l
 af = args.af
 summarize = args.summarize
 transit = args.transit
 combine = args.combine
 
-def getprefixes(ASN, transit, router):
+def getprefixes(ASN, transit, router, auser, keyfile):
 
-    username = 'netconf'
-    path2keyfile = '/home/agallo/.ssh/netconf'
+    if auser is not None:
+        username = auser
+
+    if keyfile is not None:
+        path2keyfile = keyfile
 
     dev = Device(router, user=username, ssh_private_key_file=path2keyfile)
     dev.open()
@@ -208,7 +220,7 @@ def main():
     if lookup:
         print str(ASN) + " is an " + Anotes + " " + Atype
         print  getASname(ASN)
-    ASNprefixes = getprefixes(ASN, transit, router)
+    ASNprefixes = getprefixes(ASN, transit, router, auser, keyfile)
     v4prefixes, v6prefixes = processprefixes(ASNprefixes)
     v4hosts, v4twentyfours= summarizev4(v4prefixes)
     if summarize:
